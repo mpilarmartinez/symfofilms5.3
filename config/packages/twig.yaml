@@ -1,5 +1,12 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_5_layout.html.twig']
+    globals:
+        covers_directory:  '%app.covers%'
+        photos_directory:  '%app.photos%'
+        
+        frase: '@App\Service\MovieQuoteService'
+        entityFaker: '@App\Service\EntityFakerService'
 
 when@test:
     twig:
