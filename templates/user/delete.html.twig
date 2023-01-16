@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eliminacion del usuario {{usuario.displayname}}{% endblock %}
+{% block main %}
+	{{ parent() }}
+	
+	<div class="bg-light border row align-items-center justify-content-center my-3">
+		<div class="col-6 p-4">
+	
+	<p>Eliminacion del usuario <b>{{usuario.displayname}}</b>.</p>
+	
+	<p>Por favor, confirma la operacion de baja de usuario mediante el formulario.</p>
+	 
+	{{ form(formulario) }}
+	 
+	 // falta eliminar fotografia
+ 
+{%  endblock %}
+
+	

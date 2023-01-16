@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+        {% block main %}
+        	<h1>Forbidden</h1>
+        	<h1>Error 403</h1>
+     
+        	<p>No tienes autorizacion para acceder a este recurso.</p>
+        	
+        	<div class="row align-items-center text-center">
+        		<figure class="col-6 offset-3">
+        			<img class="img-fluid" src="{{asset('images/errors/403.png')}}">
+        		</figure>
+        	</div>
+        	
+        	<p>Para mas informacion, contacta con el administrador haciendo 
+        	uso del <a href="{{ path('contacto') }}">formulario de contacto.</a></p>
+        		 	  
+        {% endblock %}
+        

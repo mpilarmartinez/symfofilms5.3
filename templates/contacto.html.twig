@@ -1,0 +1,28 @@
+ 
+       
+        {% extends 'base.html.twig' %}
+        {% block title %}Contacto{% endblock %}
+        {% block main %}
+        	{{ parent() }}
+        	<p>Contacta con <b>Symfofilms</b>.</p>
+        	<div class="bg-light border row align-items-center
+        				justify-content-center my-3 p-3">
+        		 <div class="col-6 p-2">
+        		 	 <h3>Contactar:</h3>
+        		 	 {{ form(formulario) }}
+        		 </div>
+        		 <div class="col-6 p-2 text-end">
+        		 	 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.0337651384234!2d2.1308731157034257!3d41.41678570213455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4981b5fdca4b1%3A0x35e8d1d280af19bd!2sCIFO%20Barcelona%20-%20La%20Violeta!5e0!3m2!1ses!2ses!4v1655461970948!5m2!1ses!2ses" style="border:0; width: 100%; min-height: 400px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        		 	  <p><b>CIFO Barcelona la Violeta</b></p>
+        		 	  <p>Carrer del Comte de Sert, 7, 08035 Barcelona</p>
+        		 	  <p>Aula I12 (cruso de Symfony)</p>
+        		 	  <p>tel: 932 54 17 00</p>
+        		 </div>
+        	</div>
+        {% endblock %}
+        
+      
+        
+     
+             	
+      

@@ -1,19 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+    	{% block head %}
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>{% block title %}{% endblock %} - Symfofilms</title>
+        
+        
+        <script src="{{ asset('js/bootstramp.bundle.min.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/estilo.css') }}">
+        <link rel="shortcut icon" href="{{ asset('images/template/logon.png')}}" type="image/png">
+           
+      
+    	
+    	{% endblock %}
+   <head>
+   
+   <body class="container p-3">
+   
+   {%  block login%}
+       {%  if is_granted("IS_AUTHENTICATED_FULLY") %}
+       
+       <div class="my-1 text-end">
+   			<a href="{{ path('home') }}">
+   				{{ app.user.displayname }}
+				<span style="font-size: 0.8em"> ({{ app.user.email }})</span>   			
+   			</a>
+   			-
+   			<a href="{{ path('app_logout') }}">Logout</a>
+   		</div>
+   	{%  else %}
+   			<div class="my-1 text-end">
+   				<a style="vertical-align:middle" href="{{ path('app_login') }}">
+   					LogIn
+   					<img src="{{  asset('images/buttons/login.png') }}"
+   						 alt="login" height="25" width="25">
+   				</a>
+   				<span></span>
+   				<a style="vertical-align:middle" href="{{  path('app_register') }}">
+   					Registro
+   					<img src="{{ asset('images/buttons/register.png') }}"
+   						 alt="register" height="25" width="25">
+   			 	</a>
+   		    </div>	 
+   			
+      {% endif %}
+   
+   {% endblock %}
+   
+
+   
+   		{%  block header %}
+        <header class="row border bg-light">
+        	<hgroup class="col-8">
+        		<h1>SymfoFilms</h1>
+        		<h2>Pagina de cine, ejemplo de clase</h2>
+        	<hgroup>
+        	<figure class="col-4 text-end">
+        		<a href="/">
+        			<img class="h-auto" alt="Logo" src="/images/template/logo.png">    			
+        		</a>
+        	</figure>
+        </header>
+        {% endblock %}
+        
+     
+     	{%  block nav %}
+        <div class="container row">
+        	<nav class="col-9">
+        		<ul class="nav nav-pills">
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="/">Inicio</a>
+        			</li>
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="{{ path('pelicula_search') }}">Buscar pelicula</a>
+        			</li>
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="{{ path('pelicula_list') }}">Peliculas</a>
+        			</li>
+        			{% if is_granted('create', entityFaker.getMock('Pelicula')) %}
+        			
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="{{ path('pelicula_create') }}">Nueva película</a>
+        			</li>
+					{%  endif %}
+        			
+			
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="/">Inicio</a>
+        			</li>
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="{{ path('actor_list') }}">Actores</a>
+        			</li>
+        			{% if is_granted('create', entityFaker.getMock('Actor')) %}
+        			
+        			<li class="nav-item mr-2">
+        				<a class="nav-link" href="{{ path('actor_create') }}">Nuevo actor</a>
+        			</li>
+        			{%  endif %}
+        			
+        			<li class="nav-item mr-2">
+        			<a class="nav-link" href="{{ path('contacto') }}">Contacto</a>
+        			</li>
+   					       			       			
+        		</ul>
+        	</nav>
+        	<div class="col-3 pt-2 text-end">
+        		{{ "now"|date('d/m/Y H:i', timezone="Europe/Madrid") }}
+        	</div>
+        </div>
+        {%  endblock %}
+        	
+        
+        <main class="my-3">
+        {%  block main %}
+        	{%  block success %}
+        		{%  for message in app.flashes('success') %}
+        			<div class="alert alert-success">
+        				{{  message }}
+        			</div>
+        		{%  endfor  %}
+        	{% endblock %}
+        {% endblock %}
+        </main>
+        	
+        {% block footer %} 
+        <footer class="page-footer font-small p-4 bg-light border row">
+        	</p>Aplicacion creada por <b>Maria Pilar Martinez</b> como ejemplo de clase.
+        	Desarrollada haciendo uso de <b>Symfony</b> y <b>Bootrtrap</b>.</p>
+        </footer>
         {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+      </body>
+      </html>
+             	
+      

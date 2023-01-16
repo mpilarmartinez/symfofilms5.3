@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edicion de la pelicula {{pelicula.titulo}}{% endblock %}
+{% block main %}
+	{{ parent() }}
+	<p>Edicion de la pelicula <b>{{pelicula.titulo}}</b>.</p>
+	
+	<p>A lo largo de las proximas semanas iremos editando este ejemplo para dotarlo de nuevas caracteristicas
+	 y funcionalidades.</p>
+	 
+ <div class="border my-4 bg-light row align-items-center justify-content-center">
+ <div class="col p-3 text-start">
+	 {{ form(formulario) }}
+ </div>
+ 
+ <script src="{{ asset('js/preview.js') }}"></script>
+ 
+ <figure class="col p-3 text-center bg-light">
+  <img src="{{  asset(covers_directory~'/'~(pelicula.caratula ?? 'default.jpg')) }}" 	
+  	 class="movie-cover rounded preview" 
+  	 alt="Caratula de {{  pelicula.titulo  }}"
+  	 title="Caratula de {{ pelicula.titulo }}">
+     
+
+  	
+  {%  if pelicula.caratula %}
+  	<figcaption class="my-3">
+  		Borrar esta caratula
+  		<a href="{{ path('pelicula_delete_cover', {'id':pelicula.id})}}">
+  			<img src="{{ asset('images/buttons/delete.png') }}" height="30" width="30"
+  			alt="Borrar caratula" title="Borrar caratula" class="boton"> 				 
+  		</a>
+  	</figcaption>
+  	
+    {%  endif %}
+
+</figure>
+
+
+
+<script src="{{ asset('/js/previewEdit.js')}}"></script>
+
+
+<h3>Actores</h3>
+<ul class="list-group p-2 my-3">
+	{%  for actor in pelicula.getActores() %}
+		<li class="list-group-item p-2">
+			<a class="align-middle" href="{{ path('actor_show', {'id':actor.id}) }}">
+				{{ actor.nombre }}
+			</a>
+			<span class="align-middle">, de {{ actor.nacionalidad }}.</span>
+			<a href="{{ path('pelicula_remove_actor',
+			                {'pelicula': pelicula.id, 'actor': actor.id})
+			                
+                      }}">
+                       <img src="{{ asset('/images/buttons/delete.png') }}"
+                       alt="quitar" height="25" width="25" class="m-2"> 				
+			</a>
+		</li>
+
+	{% else %}
+		<li class="list-group-item warning">No se han indicado actores.</li>
+	{%  endfor %}
+
+</ul>
+
+{{ form_start(formularioAddActor) }}
+<div class="d-flex flex-row justify-content-start align-items-center border bg-light my-2">
+
+	<div class="px-2">
+		{{ form_label(formularioAddActor.actor) }}
+	</div>
+	<div class="px-2">
+		{{ form_widget(formularioAddActor.actor) }}
+	</div>
+	<div class="p-2 mt-3">
+		{{ form_row(formularioAddActor.Add) }}
+	</div>
+		{{ form_rest(formularioAddActor) }}
+	</div>
+	{{ form_end(formularioAddActor) }}
+	
+
+
+</div>
+
+ {%  endblock %}

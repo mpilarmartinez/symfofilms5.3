@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalles de {{ pelicula.titulo}} {% endblock %}
+{% block main %}
+	{{ parent() }}
+	
+	<h2>{{ pelicula.titulo }}</h2>
+	<p>Detalles de la pelicula {{ pelicula.titulo }},
+	de {{ pelicula.director }} <b>SymfoFilms</b>.</p>
+	
+	<p>A lo largo de las proximas semanas iremos editando este ejemplo para dotarlo de nuevas caracteristicas
+	 y funcionalidades.</p>
+
+	<div class="border my-3 p-3">
+				<p><b>ID</b>:		            {{ pelicula.id }}</p>
+				<p><b>Titulo</b>:	            {{ pelicula.titulo }}</p>
+				<th><b>Duracion</b></th>:	    {{ pelicula.duracion }}</p>
+				<th><b>Director</b></th>:	    {{ pelicula.director }}</p>
+				<th><b>Genero</b></th>:	        {{ pelicula.genero }}</p>
+			
+		{%  if pelicula.getUser() %}
+			<p>Informacion aportada por
+			<i>{{ pelicula.getuser().displayname }}</i>
+			</p>
+	        {% endif %}
+			
+			</div>
+
+	</div>
+	<div class="col m-3 p-3 text-center bg-light">
+		<img class="rounded border movie-cover" style="max-width: 240px"
+			 alt="Caratula de {{ pelicula.titulo }}"
+			 title="Caratula de {{ pelicula.titulo }}"
+			 src="{{ asset(covers_directory~'/'~(pelicula.caratula ?? 'default.jpg'))}}">
+
+	</div>
+	
+
+	
+	{%  if pelicula.sinopsis %}
+	<div class="border row align-items-center justify-content-center my-3 p-4">
+		<h2>Sinopsis:</h2>
+		<p>{{  pelicula.sinopsis }}</p>
+	</div>
+	{% endif %}
+	
+	
+	{% if pelicula.getActores()|length > 0 %}
+		<h2>Lista de actores</h2>
+		{# incluye la subvista con la lista de actores #}
+		{% set actores = pelicula.getActores() %}
+		{% include '/includes/lista_actores.html.twig' %}
+	{%  endif %}
+	
+	
+		<div class="text-center">
+			<a href="{{ path('pelicula_list') }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/list.png') }}"
+				alt="Lista" title="Volver al listado"></a>
+		
+			<a href="{{ path('pelicula_edit', {'id':pelicula.id}) }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/update.png') }}"
+				alt="Modificar" title="Modificar"></a>
+		
+			<a href="{{ path('pelicula_delete', {'id':pelicula.id}) }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/delete.png') }}"
+				alt="Borrar" title="Borrar"></a>
+				
+		</div>
+		
+{% endblock %}
+				
+																
+				
+		

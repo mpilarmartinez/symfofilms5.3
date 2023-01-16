@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="bg-light border row align-items-center justify-content-center my-3 p-2">
+        <div class="row">
+            <div class="col-10">
+                <h3 class="m-2">Registro de usuario</h3>
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.phone, {label: 'Teléfono '}) }}
+                    {{ form_row(registrationForm.displayname, {label: 'Nombre'}) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                <div class="row">
+                    <div class="col"> {{ form_row(registrationForm.city, {label: 'Población '})}} </div>
+                    <div class="col"> {{ form_row(registrationForm.country, {label: 'País'})}} </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="mt-3">Términos y condiciones</h3>
+        <p>Este ejemplo de clase intro datos asi que no se ran tratados con ningun tipo de intención comercial. las unicas notificaciones son verificaciones de funcionamiento</p>
+        <div class="text-center">
+            {{ form_row(registrationForm.agreeTerms, {label: 'Acepto los términos'}) }}
+            {{ form_rest(registrationForm) }}
+
+            <button type="submit" class="btn btn-primary">Registro</button>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

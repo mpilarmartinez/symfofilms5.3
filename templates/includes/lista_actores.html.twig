@@ -1,0 +1,42 @@
+<table class="table table-striped table-bordered">
+			<tr>
+				<th>ID</th>
+				<th>Imagen</th>
+				<th>Nombre</th>
+				<th>Fechanacimiento</th>
+				<th>Nacionalidad</th>
+				<th>Opciones</th>
+			</tr>
+
+	{%  for actor in actores %}
+	<tr>
+		<td>{{ actor.id }}</td>
+			<td class="text-center">
+		  <a href="{{ path('actor_show', {'id':actor.id}) }}">
+		    <img class="lista-cover rounded"
+		      alt="Fotograia de {{ actor.nombre }}"
+		      title="Fotografia de {{ actor.nombre }}"
+		      src="{{ asset(photos_directory~'/'~(actor.fotografia ?? 'default.jpg')) }}">
+		   </a>
+		  </td>
+		<td><b>{{ actor.nombre }}</b></td>
+		<td>{{ actor.fechanacimiento | date('d/m/Y')}} </td>
+		<td>{{ actor.nacionalidad }} </td>
+
+		
+		
+		<td class="text-center">
+			<a href="{{ path('actor_show', {'id':actor.id}) }}">
+				<img height="25" width="25" src="{{ asset('images/buttons/show.png') }}>"
+					alt="Ver detalles" title="Ver detalles"></a>
+			<a href="{{ path('actor_edit', {'id':actor.id}) }}">
+				<img src="/images/buttons/update.png"
+					alt="Modificar" title="Modificar" height="20" width="20"></a>
+			<a href="{{ path('actor_delete', {'id':actor.id}) }}">
+				<img src="/images/buttons/delete.png"
+					alt="Borrar" title="Borrar" height="20" width="20"></a>
+							
+</td>
+</tr>
+{%  endfor %}
+</table>

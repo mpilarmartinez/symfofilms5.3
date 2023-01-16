@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalles de {{ actor.nombre}} {% endblock %}
+{% block main %}
+	{{ parent() }}
+	
+	<h2>{{ actor.nombre }}</h2>
+	<p>Detalles del actor {{ actor.nombre }},
+	de  <b>SymfoFilms</b>.</p>
+	
+	<p>A lo largo de las proximas semanas iremos editando este ejemplo para dotarlo de nuevas caracteristicas
+	 y funcionalidades.</p>
+
+	<div class="border my-3 p-3">
+				<p><b>ID</b>:		                {{ actor.id }}</p>
+				<p><b>Nombre</b>:	                {{ actor.nombre }}</p>
+				<th><b>Fechanacimiento</b></th>:	{{ actor.fechanacimiento | date('d/m/Y') }}</p>
+				<th><b>Nacionalidad</b></th>:	    {{ actor.nacionalidad }}</p>
+				<th><b>Biografia</b></th>:	        {{ actor.biografia }}</p>
+			</div>
+
+	</div>
+	<div class="col m-3 p-3 text-center bg-light">
+		<img class="rounded border actor-photo" style="max-width: 240px"
+			 alt="Fotografia de {{ actor.nombre }}"
+			 title="Fotografia de {{ actor.nombre }}"
+			 src="{{ asset(photos_directory~'/'~(actor.fotografia ?? 'default.jpg'))}}">
+	</div>
+</div>
+
+
+
+	{% if actor.getPeliculas()|length > 0 %}
+		<h2>Lista de actores</h2>
+		{# incluye la subvista con la lista de peliculas #}
+		{% set peliculas = actor.getPeliculas() %}
+		{% include '/includes/lista_peliculas.html.twig' %}
+	{%  endif %}
+
+
+	
+		<div class="text-center">
+			<a href="{{ path('actor_list') }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/list.png') }}"
+				alt="Lista" title="Volver al listado"></a>
+		
+			<a href="{{ path('actor_edit', {'id':actor.id}) }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/update.png') }}"
+				alt="Modificar" title="Modificar"></a>
+		
+			<a href="{{ path('actor_delete', {'id':actor.id}) }}">
+				<img height="40" width="40" src="{{ asset('images/buttons/delete.png') }}"
+				alt="Borrar" title="Borrar"></a>
+				
+		</div>
+		
+{% endblock %}
+				
+																
+				
+		
